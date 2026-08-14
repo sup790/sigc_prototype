@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="styles.css">
+<script src="script.js"></script>
+<title>Gestão de Colaboradores</title>
+
+</head>
+<body>
+<div class="app">
+  <header class="toolbar">
+    <button class="tool" title="Novo" id="newBtn">＋</button>
+    <button class="tool" title="Editar" id="editBtn">✎</button>
+    <button class="tool" title="Anterior" id="prevBtn">‹‹</button>
+    <button class="tool" title="Voltar" id="backBtn">‹</button>
+    <button class="tool" title="Avançar" id="nextBtn">›</button>
+    <button class="tool" title="Próximo" id="next2Btn">››</button>
+    <button class="tool" title="Excluir" id="deleteBtn">▥</button>
+    <button class="tool" title="Atualizar" id="refreshBtn">↻</button>
+    <button class="tool" title="Pesquisar" id="focusSearchBtn">⌕</button>
+    <button class="tool" title="Menu" id="menuBtn">☰</button>
+    <div class="toolbar-spacer"></div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="pessoa">Dados Pessoas</button>
+    <button class="tab" data-tab="documentos">Arquivos / Documentos</button>
+    <button class="tab" data-tab="bancarios">Dados Bancários</button>
+    <button class="tab" data-tab="localizar">Localizar</button>
+  </nav>
+
+  <main class="content">
+    <!-- DADOS PESSOAS -->
+    <section class="tab-panel active" id="pessoa">
+      <div class="form-grid">
+        <div class="field col-3">
+          <label for="cpf">CPF *</label>
+          <input id="cpf" maxlength="14" placeholder="000.000.000-00">
+        </div>
+        <div class="field col-6">
+          <label for="nome">Nome *</label>
+          <input id="nome" placeholder="Nome completo">
+        </div>
+        <div class="field col-3">
+          <label for="sexo">Sexo</label>
+          <select id="sexo">
+            <option value="">Selecione</option><option>Masculino</option><option>Feminino</option><option>Outro</option>
+          </select>
+        </div>
+
+        <div class="field col-3">
+          <label for="telefone1">Telefone 1</label>
+          <input id="telefone1" placeholder="(00) 00000-0000">
+        </div>
+        <div class="field col-3">
+          <label for="telefone2">Telefone 2</label>
+          <input id="telefone2" placeholder="(00) 00000-0000">
+        </div>
+        <div class="field col-4">
+          <label for="email">E-mail</label>
+          <input id="email" type="email" placeholder="Informe seu endereço eletrônico">
+        </div>
+        <div class="field col-2">
+          <label for="nascimento">Nascimento</label>
+          <input id="nascimento" type="date">
+        </div>
+
+        <div class="field col-2">
+          <label for="admissao">Data da Admissão</label>
+          <input id="admissao" type="date">
+        </div>
+        <div class="field col-2">
+          <label for="demissao">Data da Demissão</label>
+          <input id="demissao" type="date">
+        </div>
+        <div class="field col-4">
+          <label for="empresa">Empresa de Vinculação</label>
+          <select id="empresa">
+            <option value="">Selecione</option><option>Confiança</option><option>Csh</option><option>Creta</option><option>Map</option>
+          </select>
+        </div>
+        <div class="field col-4">
+          <label for="nte">NTE</label>
+          <select id="nte">
+            <option value="">Selecione</option>
+            <script>
+              for(let i=1;i<=27;i++){
+                const n=String(i).padStart(2,'0');
+                document.write(`<option>NTE - ${n}</option>`);
+              }
+            </script>
+          </select>
+        </div>
+
+        <div class="field col-4">
+          <label for="municipio">Município</label>
+          <input id="municipio" placeholder="Informe o município">
+        </div>
+        <div class="field col-4">
+          <label for="lotacao">Unidade de Lotação</label>
+          <select id="lotacao">
+            <option value="">Selecione</option>
+            <option value="uee">UEE</option>
+            <option value="administrativa">Unidade Administrativa</option>
+          </select>
+        </div>
+        <div class="field col-4 conditional" id="wrapUee">
+          <label for="uee">UEE</label>
+          <select id="uee">
+            <option value="">Selecione</option>
+            <option>UEE - Unidade 01</option><option>UEE - Unidade 02</option><option>UEE - Unidade 03</option>
+            <option>UEE - Unidade 04</option><option>UEE - Unidade 05</option>
+          </select>
+        </div>
+        <div class="field col-4 conditional" id="wrapAdm">
+          <label for="unidadeAdm">Unidade Administrativa</label>
+          <select id="unidadeAdm">
+            <option value="">Selecione</option>
+            <option>Administração Central</option><option>Recursos Humanos</option><option>Financeiro</option>
+            <option>Jurídico</option><option>Operações</option>
+          </select>
+        </div>
+        <div class="field col-4 conditional" id="wrapSec">
+          <label for="codigoSec">Código SEC</label>
+          <select id="codigoSec">
+            <option value="">Selecione</option>
+            <option>SEC-001</option><option>SEC-002</option><option>SEC-003</option><option>SEC-004</option>
+          </select>
+        </div>
+        <div class="field col-4">
+          <label for="status">Situação Funcional</label>
+          <select id="status">
+            <option value="">Selecione</option><option value="ativo">Ativo</option><option value="inativo">Desligado</option>
+            <option value="inativo">Afastado</option><option value="inativo">Falecido</option><option value="inativo">Férias</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" id="clearPerson">Limpar</button>
+        <button class="btn primary" id="savePerson">Salvar</button>
+      </div>
+    </section>
+
+    <!-- DOCUMENTOS -->
+    <section class="tab-panel" id="documentos">
+      <div class="panel">
+        <div class="toolbar-row">
+          <button class="btn primary" id="attachBtn">＋ &nbsp; Anexar documento</button>
+          <input id="fileInput" class="file-input" type="file" multiple>
+          <div class="spacer"></div>
+          <span class="hint">Documentos ficam vinculados ao colaborador selecionado.</span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th style="width:60px">Código</th><th>Documento</th><th>Arquivo</th><th>Data</th><th style="width:120px">Ações</th></tr></thead>
+            <tbody id="docsBody">
+              <tr><td colspan="5" style="text-align:center;padding:45px">Não existem documentos a serem exibidos</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- BANCÁRIOS -->
+    <section class="tab-panel" id="bancarios">
+      <div class="panel">
+        <div class="toolbar-row">
+          <button class="btn primary" id="addBank">＋ &nbsp; Adicionar dados bancários</button>
+          <div class="spacer"></div>
+          <button class="btn icon" id="refreshBanks" title="Atualizar">↻</button>
+          <button class="btn icon" id="filterBanks" title="Filtrar">▼</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Código</th><th>Banco</th><th>Tipo de conta</th><th>Agência</th><th>Conta</th><th>Ações</th></tr></thead>
+            <tbody id="bankBody">
+              <tr><td colspan="6" style="text-align:center;padding:80px">Não existem dados a serem exibidos</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="hint">Para editar ou excluir um registro, selecione a linha.</p>
+      </div>
+    </section>
+
+    <!-- LOCALIZAR -->
+    <section class="tab-panel" id="localizar">
+      <div class="panel search-panel">
+        <div class="search-grid">
+          <div class="field col-3">
+            <label for="searchCodigo">Código</label>
+            <input id="searchCodigo" placeholder="Digite o código">
+          </div>
+          <div class="field col-4">
+            <label for="searchNome">Nome</label>
+            <input id="searchNome" placeholder="Digite o nome">
+          </div>
+          <div class="field col-3">
+            <label for="searchCpf">CPF</label>
+            <input id="searchCpf" placeholder="000.000.000-00">
+          </div>
+          <div class="field col-2 search-actions">
+            <button class="btn primary" id="searchBtn">Pesquisar</button>
+            <button class="btn" id="clearSearch">Limpar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="grid-table">
+          <thead>
+            <tr><th>Código</th><th>Nome</th><th>Sexo</th><th>CPF</th><th>Celular 1</th><th>E-mail</th><th>Nascimento</th><th>Empresa</th><th>Situação</th></tr>
+          </thead>
+          <tbody id="peopleBody"></tbody>
+        </table>
+      </div>
+      <p class="hint">Clique duas vezes em um colaborador para abrir e editar seus dados.</p>
+    </section>
+  </main>
+</div>
+
+<div class="modal-backdrop" id="bankModal">
+  <div class="modal">
+    <div class="modal-header">
+      <strong>Adicionar dados bancários</strong>
+      <button class="close" data-close="bankModal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field col-6"><label for="bankName">Banco</label><select id="bankName">
+          <option value="">Selecione</option><option>Banco do Brasil</option><option>Bradesco</option><option>Caixa Econômica Federal</option><option>Itaú</option><option>Santander</option><option>Outro</option>
+        </select></div>
+        <div class="field col-6"><label for="accountType">Tipo de conta</label><select id="accountType">
+          <option value="">Selecione</option><option>Conta Corrente</option><option>Conta Poupança</option><option>Conta Salário</option>
+        </select></div>
+        <div class="field col-6"><label for="agency">Agência</label><input id="agency" placeholder="0000"></div>
+        <div class="field col-6"><label for="account">Conta</label><input id="account" placeholder="00000-0"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" data-close="bankModal">Cancelar</button>
+      <button class="btn primary" id="saveBank">Adicionar</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="confirmModal">
+  <div class="modal">
+    <div class="modal-header"><strong>Confirmação</strong><button class="close" data-close="confirmModal">×</button></div>
+    <div class="modal-body"><p id="confirmText">Confirma a operação?</p></div>
+    <div class="modal-footer"><button class="btn" data-close="confirmModal">Cancelar</button><button class="btn danger" id="confirmYes">Confirmar</button></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<div class="status-bar"><span id="recordStatus">Novo cadastro</span><span>Gestão de Colaboradores</span></div>
+</body>
+</html>
